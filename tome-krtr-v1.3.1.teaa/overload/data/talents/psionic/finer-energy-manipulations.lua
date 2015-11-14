@@ -20,6 +20,7 @@
 
 newTalent{
 	name = "Realign",
+	kr_name = "재조정",
 	type = {"psionic/finer-energy-manipulations", 1},
 	require = psi_cun_req1,
 	points = 5,
@@ -63,7 +64,7 @@ newTalent{
 			end
 		end
 		if known then
-			game.logSeen(self, "%s is cured!", self.name:capitalize())
+			game.logSeen(self, "%s 치료되었습니다!", (self.kr_name or self.name):capitalize():addJosa("가"))
 		end
 		
 		if core.shader.active(4) then
@@ -76,14 +77,15 @@ newTalent{
 	info = function(self, t)
 		local heal = t.getHeal(self, t)
 		local cure = t.numCure(self, t)
-		return ([[Realign and readjust your body with the power of your mind, curing up to %d detrimental physical effects and healing you for %d life.
-		The life healed increases with your Mindpower.]]):
+		return ([[정신력을 통해 육체를 재조정 및 재변경하여, %d 개의 해로운 물리적 상태 이상을 치료하고 생명력을 %d 회복합니다.
+		생명력 회복량은 정신력의 영향을 받아 증가합니다.]]):
 		format(cure, heal)
 	end,
 }
 
 newTalent{
 	name = "Reshape Weapon/Armour", image = "talents/reshape_weapon.png",
+	kr_name = "무기/갑옷 재구성",
 	type = {"psionic/finer-energy-manipulations", 2},
 	require = psi_cun_req2,
 	mode = "passive",
@@ -115,10 +117,10 @@ newTalent{
 		local weapon_boost = t.damBoost(self, t)
 		local arm = t.armorBoost(self, t)
 		local fat = t.fatigueBoost(self, t)
-		return ([[Manipulate forces on the molecular level to realign, rebalance, and hone a weapon, set of body armor, or a shield.  (Mindstars resist being adjusted because they are already in an ideal natural state.)
-		The accuracy and damage of any weapon will act as if %d higher.
-		Your total armour will increase by %d and your fatigue rating by %d for each body armour and shield worn.
-		The effects increase with your Mindpower.]]):
+		return ([[무기나 갑옷, 또는 방패를 원자 레벨에서부터 재구성합니다. (마석은 이미 이상적인 상태로 존재하기 때문에, 재구성을 저항합니다)
+		무기의 정확도와 피해량이 영구적으로 %d 상승합니다.
+		갑옷과 방패를 착용했을 시 방어도가 영구적으로 %d 상승하고, 피로도가 영구적으로 %d 감소합니다.
+		변화량은 정신력의 영향을 받아 증가합니다.]]):
 		format(weapon_boost, arm, fat)
 	end,
 }
